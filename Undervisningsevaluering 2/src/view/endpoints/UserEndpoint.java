@@ -33,8 +33,8 @@ public class UserEndpoint {
                 .build();
     }
 
+
     @GET
-    @Consumes("applications/json")
     @Path("/lecture/{code}")
     public Response getLectures(@PathParam("code") String code) {
         Gson gson = new Gson();
