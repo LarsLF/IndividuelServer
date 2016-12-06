@@ -71,7 +71,6 @@ public class UserEndpoint {
     }
 
     @GET
-    @Consumes("applications/json")
     @Path("/review/{lectureId}")
     public Response getReviews(@PathParam("lectureId") int lectureId) {
         Gson gson = new Gson();
@@ -108,6 +107,16 @@ public class UserEndpoint {
     @OPTIONS
     @Path("/course/{userId}")
     public Response optionsCourse() {
+        return Response
+                .status(200)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Headers", "Content-Type")
+                .build();
+    }
+
+    @OPTIONS
+    @Path("/review/{lectureId}")
+    public Response optionsReviews() {
         return Response
                 .status(200)
                 .header("Access-Control-Allow-Origin", "*")

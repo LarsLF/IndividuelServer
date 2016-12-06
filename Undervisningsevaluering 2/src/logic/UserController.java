@@ -158,11 +158,12 @@ public class UserController {
             params.put("course_attendant.user_id", String.valueOf(userId));
             joins.put("course_attendant", "course_id");
 
-            String[] attributes = new String[]{"name, code"};
+            String[] attributes = new String[]{"name", "code", "course.id"};
             ResultSet rs = DBWrapper.getRecords("course", attributes, params, joins, 0);
 
             while (rs.next()) {
                 CourseDTO course = new CourseDTO();
+
                 course.setDisplaytext(rs.getString("name"));
                 course.setCode(rs.getString("code"));
                 courses.add(course);
