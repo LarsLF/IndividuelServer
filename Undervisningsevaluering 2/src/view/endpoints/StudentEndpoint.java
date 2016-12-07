@@ -36,12 +36,22 @@ public class StudentEndpoint extends UserEndpoint {
         }
     }
 
+    @OPTIONS
+    @Path("/review")
+    public Response optionsReview() {
+        return Response
+                .status(200)
+                .header("Access-Control-Allow-Origin", "*")
+                .header("Access-Control-Allow-Headers", "Content-Type")
+                .build();
+    }
+
     @DELETE
-    @Path("/review/{userId}/{reviewId}")
-    public Response deleteReview(@PathParam("userId") int userId, @PathParam("reviewId") int reviewId) {
+    @Path("/review/{reviewId}")
+    public Response deleteReview(@PathParam("reviewId") int reviewId) {
         Gson gson = new Gson();
         StudentController studentCtrl = new StudentController();
-        boolean isDeleted = studentCtrl.softDeleteReview(userId, reviewId);
+        boolean isDeleted = studentCtrl.softDeleteReview(reviewId);
 
         if (isDeleted) {
             String toJson = gson.toJson(Digester.encrypt(gson.toJson(isDeleted)));
